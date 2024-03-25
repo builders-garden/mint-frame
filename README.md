@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌳 mint-frame
 
-## Getting Started
+a generic NextJS app that allows users to create trending mints frames by constructing a specific url.
 
-First, run the development server:
+## 📦 installation
+
+once you have cloned the repository, you can install the dependencies by running the following command:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install # using npm
+yarn install # using yarn
+pnpm install # using pnpm
+bun install # using bun
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+the first step is to setup the **environment variables** for the project:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+cp .env.example .env
+```
 
-## Learn More
+make sure to populate the `.env` file with the correct values:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+AIRSTACK_API_KEY="" # your Airstack API key
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+once everything is ready, in order to start the development server you must run the following command:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+npm run dev # using npm
+yarn dev # using yarn
+pnpm dev # using pnpm
+bun dev # using bun
+```
 
-## Deploy on Vercel
+once the app is running, you can construct an URL with the following format:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+http://localhost:3000/frame/{CHAIN}?a={ADDRESS}&c={COUNT}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+where:
+
+- `{CHAIN}` is the blockchain network, in this case only `base` is supported;
+- `{ADDRESS}` is the address of the trending mint NFT;
+- `{COUNT}` is the number of trending mints that you want to display.
+
+## 📜 license
+
+this project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
