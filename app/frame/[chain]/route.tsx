@@ -13,6 +13,16 @@ const handleRequest = frames(async (ctx) => {
 
   if (chain !== "base" || !address || !isAddress(address) || !count) {
     return {
+      accepts: [
+        {
+          id: "farcaster",
+          version: "vNext",
+        },
+        {
+          id: "xmtp",
+          version: "vNext",
+        },
+      ],
       image: (
         <div
           style={{
@@ -50,6 +60,16 @@ const handleRequest = frames(async (ctx) => {
 
   if (!nft) {
     return {
+      accepts: [
+        {
+          id: "farcaster",
+          version: "vNext",
+        },
+        {
+          id: "xmtp",
+          version: "vNext",
+        },
+      ],
       image: (
         <div
           style={{
@@ -137,6 +157,16 @@ const handleRequest = frames(async (ctx) => {
       width: 764,
       height: 400,
     },
+    accepts: [
+      {
+        id: "farcaster",
+        version: "vNext",
+      },
+      {
+        id: "xmtp",
+        version: "vNext",
+      },
+    ],
     buttons: [
       <Button
         action="link"
