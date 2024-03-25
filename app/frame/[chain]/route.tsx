@@ -109,15 +109,34 @@ const handleRequest = frames(async (ctx) => {
             justifyContent: "center",
           }}
         >
-          <h1 style={{ fontSize: "36px", color: "white" }}>
+          <div
+            style={{
+              fontSize: "32",
+              color: "white",
+              display: "flex",
+              textAlign: "center",
+            }}
+          >
             {nft.metaData?.name}
-          </h1>
-          <p style={{ fontSize: "24px", color: "white" }}>
+          </div>
+          <div
+            style={{
+              fontSize: "24px",
+              color: "white",
+              display: "flex",
+              textAlign: "center",
+            }}
+          >
             {parseInt(count) || 0} mints
-          </p>
+          </div>
         </div>
       </div>
     ),
+    imageOptions: {
+      aspectRatio: "1.91:1",
+      width: 764,
+      height: 400,
+    },
     buttons: [
       <Button
         action="link"
