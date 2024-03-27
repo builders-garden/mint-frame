@@ -5,6 +5,7 @@ import {
   TrendingMintsCriteria,
   TrendingsMintsQuery,
 } from "./airstack-types";
+import { getRedisClient } from "./redis";
 
 init(process.env.AIRSTACK_API_KEY as string);
 
@@ -126,6 +127,14 @@ interface Error {
 }
 
 export const fetchNft = async (address: string) => {
+  const redis = await getRedisClient();
+
+  const cachedNft = await redis.get(address);
+
+  if (cachedNft) {
+    return JSON.parse(cachedNft);
+  }
+
   const { data, error }: NFTQueryResponse = await fetchQuery(
     NFT_DETAIL_QUERY_BASE,
     {
@@ -143,5 +152,10 @@ export const fetchNft = async (address: string) => {
     return null;
   }
 
-  return data.TokenNfts.TokenNft![0];
+  const nft = data.TokenNfts.TokenNft![0];
+
+  const thirtyDaysInSeconds = 60 * 60 * 24 * 30;
+  await redis.setEx(address, thirtyDaysInSeconds, JSON.stringify(nft));
+
+  return nft;
 };
