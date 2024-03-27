@@ -1077,6 +1077,7 @@ export type Social = {
   /** Blockchain address, ENS domain name, social identity such as Farcaster (for Farcaster use 'fc_fid:' prefix followed by the Farcaster user ID like fc_fid:5650, or use 'fc_fname:' prefix followed by the Farcaster user ID like 'fc_fname:vbuterin') or Lens (e.g. 'stani.lens) */
   identity: Maybe<Scalars['Identity']['output']>;
   isDefault: Maybe<Scalars['Boolean']['output']>;
+  isFarcasterPowerUser: Maybe<Scalars['Boolean']['output']>;
   location: Maybe<Scalars['String']['output']>;
   metadataURI: Maybe<Scalars['String']['output']>;
   profileBio: Maybe<Scalars['String']['output']>;
@@ -1903,4 +1904,4 @@ export type NftDetailQueryVariables = Exact<{
 }>;
 
 
-export type NftDetailQuery = { TokenNfts: { TokenNft: Array<{ tokenURI: string | null, contentValue: { image: { medium: string | null } | null } | null, metaData: { name: string | null, description: string | null } | null }> | null } | null };
+export type NftDetailQuery = { TokenNfts: { TokenNft: Array<{ tokenURI: string | null, contentValue: { image: { small: string | null, medium: string | null } | null } | null, metaData: { name: string | null, description: string | null } | null }> | null } | null };

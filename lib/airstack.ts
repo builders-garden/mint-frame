@@ -103,6 +103,7 @@ const NFT_DETAIL_QUERY_BASE =
           tokenURI
           contentValue {
             image {
+              small
               medium
             }
           }

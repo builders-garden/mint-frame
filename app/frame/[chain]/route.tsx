@@ -103,7 +103,7 @@ const handleRequest = frames(async (ctx) => {
     };
   }
 
-  const image = nft.contentValue?.image?.medium;
+  const image = nft.contentValue?.image?.small;
 
   return {
     image: (
