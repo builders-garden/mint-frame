@@ -103,55 +103,8 @@ const handleRequest = frames(async (ctx) => {
     };
   }
 
-  const image = nft.contentValue?.image?.small;
-
   return {
-    image: (
-      <div
-        style={{
-          alignItems: "center",
-          background: "black",
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "nowrap",
-          height: "100%",
-          justifyContent: "space-around",
-          textAlign: "center",
-          width: "100%",
-        }}
-      >
-        <img src={image!} style={{ width: "50%" }} />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignContent: "center",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "32",
-              color: "white",
-              display: "flex",
-              textAlign: "center",
-            }}
-          >
-            {nft.metaData?.name}
-          </div>
-          <div
-            style={{
-              fontSize: "24px",
-              color: "white",
-              display: "flex",
-              textAlign: "center",
-            }}
-          >
-            {parseInt(count) || 0} mints
-          </div>
-        </div>
-      </div>
-    ),
+    image: `https://mint.builders.garden/api/image?a=${address}&c=${count}`,
     imageOptions: {
       aspectRatio: "1.91:1",
       width: 764,

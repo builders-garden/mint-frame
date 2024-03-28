@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@airstack/node": "^0.0.5",
+    "@open-frames/proxy-client": "^0.2.1",
     "@redis/client": "^1.5.14",
     "frames.js": "^0.9.6",
     "next": "14.1.4",
