@@ -1,6 +1,11 @@
 import { fetchNft } from "@/lib/airstack";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
+import fs from "fs";
+import { join } from "path";
+
+const interFontPath = join(process.cwd(), "Inter-SemiBold.ttf");
+const interFontData = fs.readFileSync(interFontPath);
 
 export async function GET(req: NextRequest) {
   const address = req.nextUrl.searchParams.get("a");
@@ -16,49 +21,68 @@ export async function GET(req: NextRequest) {
           alignItems: "center",
           background: "black",
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           flexWrap: "nowrap",
           height: "100%",
-          justifyContent: "space-around",
-          textAlign: "center",
           width: "100%",
+          position: "relative",
+          padding: "4px",
         }}
       >
-        <img src={image!} style={{ width: "50%" }} />
+        <img
+          src={image!}
+          style={{
+            width: "100%",
+            borderRadius: "8px",
+            border: "2px solid white",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: 8,
+            left: 8,
+            width: "98%",
+            height: "40px",
+            color: "white",
+            background: "rgba(0, 0, 0, 0.5)",
+            borderRadius: "0 0 8px 8px",
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "8px",
+            flexDirection: "column",
+            fontFamily: "Inter-SemiBold",
+          }}
+        >
+          {nft.metaData?.name}
+        </div>
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            alignContent: "center",
-            justifyContent: "center",
+            padding: "8px",
+            position: "absolute",
+            top: 12,
+            right: 12,
+            backgroundColor: "white",
+            borderRadius: "60px",
+            fontFamily: "Inter-SemiBold",
           }}
         >
-          <div
-            style={{
-              fontSize: "32",
-              color: "white",
-              display: "flex",
-              textAlign: "center",
-            }}
-          >
-            {nft.metaData?.name}
-          </div>
-          <div
-            style={{
-              fontSize: "24px",
-              color: "white",
-              display: "flex",
-              textAlign: "center",
-            }}
-          >
-            {parseInt(count!) || 0} mints
-          </div>
+          {parseInt(count!) || 0} mints
         </div>
       </div>
     ),
     {
-      width: 764,
+      width: 400,
       height: 400,
+      fonts: [
+        {
+          data: interFontData,
+          name: "Inter-SemiBold.ttf",
+          style: "normal",
+          weight: 400,
+        },
+      ],
     }
   );
 }

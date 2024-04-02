@@ -1757,6 +1757,7 @@ export type TrendingTokensInput = {
   cursor: InputMaybe<Scalars['String']['input']>;
   filter: InputMaybe<TrendingTokensFilter>;
   limit: InputMaybe<Scalars['Int']['input']>;
+  swappable: Boolean_Comparator_Exp;
   timeFrame: TimeFrame;
   transferType: TrendingTokensTransferType;
 };
