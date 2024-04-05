@@ -31,7 +31,7 @@ export default function Home({
 }) {
   const { a, c, chain } = searchParams as any;
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-black">
+    <main className="flex min-h-screen flex-col items-center justify-between p-8 bg-black">
       <div className="flex flex-col items-center justify-center space-y-8">
         <div className="flex flex-col items-center justify-center space-y-2">
           <div className="text-3xl text-center font-black">
@@ -80,7 +80,7 @@ export default function Home({
           </div>
 
           <p className="text-center text-sm">
-            Made by ❤️ by{" "}
+            Made with ❤️ by{" "}
             <a className="text-green-500" href="https://builders.garden">
               builders.garden
             </a>
