@@ -1664,7 +1664,7 @@ export type TokenTransfer = {
   /** Token transfer transction hash */
   transactionHash: Scalars['String']['output'];
   /** Type of the token transfer */
-  type: Maybe<Scalars['String']['output']>;
+  type: Maybe<TokenTransferType>;
 };
 
 export type TokenTransferFilter = {
@@ -1680,10 +1680,22 @@ export type TokenTransferFilter = {
   tokenId: InputMaybe<String_Comparator_Exp>;
   tokenType: InputMaybe<TokenType_Comparator_Exp>;
   transactionHash: InputMaybe<String_Comparator_Exp>;
+  type: InputMaybe<TokenTransferType_Comparator_Exp>;
 };
 
 export type TokenTransferOrderBy = {
   blockTimestamp: InputMaybe<OrderBy>;
+};
+
+export enum TokenTransferType {
+  Burn = 'BURN',
+  Mint = 'MINT',
+  Transfer = 'TRANSFER'
+}
+
+export type TokenTransferType_Comparator_Exp = {
+  _eq: InputMaybe<TokenTransferType>;
+  _in: InputMaybe<Array<TokenTransferType>>;
 };
 
 export type TokenTransfersInput = {

@@ -11,7 +11,7 @@ export async function generateMetadata({ searchParams }: Props) {
   const metadata = await fetchMetadata(
     new URL(
       `/frame/${searchParams.chain}?a=${searchParams.a}&c=${searchParams.c}`,
-      process.env.VERCEL_URL || "http://localhost:3001"
+      process.env.BASE_URL || "http://localhost:3001"
     )
   );
   return {
