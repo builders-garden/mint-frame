@@ -10,7 +10,6 @@ const handleRequest = frames(async (ctx) => {
   const chain = ctx.url.pathname.replaceAll("/frame/", "");
   const address = ctx.url.searchParams.get("a");
   const count = ctx.url.searchParams.get("c");
-
   if (chain !== "base" || !address || !isAddress(address) || !count) {
     return {
       accepts: [
@@ -55,9 +54,7 @@ const handleRequest = frames(async (ctx) => {
       ),
     };
   }
-
   const nft = await fetchNft(address);
-
   if (!nft) {
     return {
       accepts: [

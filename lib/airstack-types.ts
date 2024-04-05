@@ -60,9 +60,6 @@ export type Account = {
 };
 
 export type AccountFilter = {
-  _and: InputMaybe<Array<AccountFilter>>;
-  _nor: InputMaybe<Array<AccountFilter>>;
-  _or: InputMaybe<Array<AccountFilter>>;
   address: InputMaybe<Identity_Comparator_Exp>;
   createdAtBlockTimestamp: InputMaybe<Time_Comparator_Exp>;
   implementation: InputMaybe<Address_Comparator_Exp>;
@@ -267,9 +264,6 @@ export type DomainDappSlug_Comparator_Exp = {
 };
 
 export type DomainFilter = {
-  _and: InputMaybe<Array<DomainFilter>>;
-  _nor: InputMaybe<Array<DomainFilter>>;
-  _or: InputMaybe<Array<DomainFilter>>;
   isPrimary: InputMaybe<Boolean_Comparator_Exp>;
   lastUpdatedBlockTimestamp: InputMaybe<Time_Comparator_Exp>;
   name: InputMaybe<String_Comparator_Exp>;
@@ -321,6 +315,54 @@ export enum EveryBlockchain {
   All = 'ALL'
 }
 
+export type FarcasterCast = {
+  castedAtTimestamp: Maybe<Scalars['Time']['output']>;
+  castedBy: Maybe<Social>;
+  channel: Maybe<FarcasterChannel>;
+  embeds: Maybe<Array<Maybe<Scalars['Map']['output']>>>;
+  fid: Maybe<Scalars['String']['output']>;
+  frame: Maybe<FarcasterFrame>;
+  hash: Maybe<Scalars['String']['output']>;
+  id: Maybe<Scalars['String']['output']>;
+  mentions: Maybe<Array<Mentions>>;
+  numberOfLikes: Maybe<Scalars['Int']['output']>;
+  numberOfRecasts: Maybe<Scalars['Int']['output']>;
+  numberOfReplies: Maybe<Scalars['Int']['output']>;
+  parentCast: Maybe<FarcasterCast>;
+  parentFid: Maybe<Scalars['String']['output']>;
+  parentHash: Maybe<Scalars['String']['output']>;
+  parentUrl: Maybe<Scalars['String']['output']>;
+  rawText: Maybe<Scalars['String']['output']>;
+  rootParentHash: Maybe<Scalars['String']['output']>;
+  rootParentUrl: Maybe<Scalars['String']['output']>;
+  text: Maybe<Scalars['String']['output']>;
+  url: Maybe<Scalars['String']['output']>;
+};
+
+export type FarcasterCastFilter = {
+  castedAtTimestamp: InputMaybe<Time_Comparator_Exp>;
+  castedBy: InputMaybe<Identity_Comparator_Exp>;
+  frameUrl: InputMaybe<Simple_String_Comparator_Exp>;
+  hasEmbeds: InputMaybe<Boolean_Comparator_Exp>;
+  hasFrames: InputMaybe<Boolean_Comparator_Exp>;
+  hasMentions: InputMaybe<Boolean_Comparator_Exp>;
+  hash: InputMaybe<Simple_String_Comparator_Exp>;
+  parentHash: InputMaybe<Simple_String_Comparator_Exp>;
+  url: InputMaybe<Simple_String_Comparator_Exp>;
+};
+
+export type FarcasterCastInput = {
+  blockchain: EveryBlockchain;
+  cursor: InputMaybe<Scalars['String']['input']>;
+  filter: FarcasterCastFilter;
+  limit: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type FarcasterCastOutput = {
+  Cast: Maybe<Array<FarcasterCast>>;
+  pageInfo: Maybe<PageInfo>;
+};
+
 export type FarcasterChannel = {
   channelId: Scalars['String']['output'];
   createdAtTimestamp: Scalars['Time']['output'];
@@ -358,9 +400,6 @@ export type FarcasterChannelActionType_Comparator_Exp = {
 };
 
 export type FarcasterChannelFilter = {
-  _and: InputMaybe<Array<FarcasterChannelFilter>>;
-  _nor: InputMaybe<Array<FarcasterChannelFilter>>;
-  _or: InputMaybe<Array<FarcasterChannelFilter>>;
   channelId: InputMaybe<String_Comparator_Exp>;
   createdAtTimestamp: InputMaybe<Time_Comparator_Exp>;
   leadId: InputMaybe<String_Comparator_Exp>;
@@ -406,9 +445,6 @@ export type FarcasterChannelParticipantParticipantArgs = {
 };
 
 export type FarcasterChannelParticipantFilter = {
-  _and: InputMaybe<Array<FarcasterChannelParticipantFilter>>;
-  _nor: InputMaybe<Array<FarcasterChannelParticipantFilter>>;
-  _or: InputMaybe<Array<FarcasterChannelParticipantFilter>>;
   channelActions: InputMaybe<FarcasterChannelActionType_Comparator_Exp>;
   channelId: InputMaybe<String_Comparator_Exp>;
   channelName: InputMaybe<Regex_String_Comparator_Exp>;
@@ -453,6 +489,19 @@ export type FarcasterChannelsOutput = {
   pageInfo: Maybe<PageInfo>;
 };
 
+export type FarcasterFrame = {
+  buttons: Maybe<Array<FrameButton>>;
+  castedAtTimestamp: Maybe<Scalars['Time']['output']>;
+  frameHash: Maybe<Scalars['String']['output']>;
+  frameUrl: Maybe<Scalars['String']['output']>;
+  id: Maybe<Scalars['String']['output']>;
+  imageAspectRatio: Maybe<Scalars['String']['output']>;
+  imageUrl: Maybe<Scalars['String']['output']>;
+  inputText: Maybe<Scalars['String']['output']>;
+  postUrl: Maybe<Scalars['String']['output']>;
+  state: Maybe<Scalars['String']['output']>;
+};
+
 export type FarcasterFrameMessageInput = {
   filter: FarcasterFrameMessageInputFilter;
 };
@@ -481,6 +530,14 @@ export type Float_Comparator_Exp = {
   _lte: InputMaybe<Scalars['Float']['input']>;
   _ne: InputMaybe<Scalars['Float']['input']>;
   _nin: InputMaybe<Array<Scalars['Float']['input']>>;
+};
+
+export type FrameButton = {
+  action: Maybe<Scalars['String']['output']>;
+  id: Maybe<Scalars['String']['output']>;
+  index: Maybe<Scalars['Int']['output']>;
+  label: Maybe<Scalars['String']['output']>;
+  target: Maybe<Scalars['String']['output']>;
 };
 
 export type FrameMessage = {
@@ -570,6 +627,12 @@ export type Media = {
   video: Maybe<VideoVariants>;
 };
 
+export type Mentions = {
+  fid: Maybe<Scalars['String']['output']>;
+  position: Maybe<Scalars['Int']['output']>;
+  profile: Maybe<Social>;
+};
+
 export type NftAttribute = {
   displayType: Maybe<Scalars['String']['output']>;
   maxValue: Maybe<Scalars['String']['output']>;
@@ -580,9 +643,6 @@ export type NftAttribute = {
 };
 
 export type NftAttributeFilter = {
-  _and: InputMaybe<Array<NftAttributeFilter>>;
-  _nor: InputMaybe<Array<NftAttributeFilter>>;
-  _or: InputMaybe<Array<NftAttributeFilter>>;
   trait_type: InputMaybe<String_Comparator_Exp>;
   value: InputMaybe<String_Comparator_Exp>;
 };
@@ -614,9 +674,6 @@ export type NftMetadata = {
 };
 
 export type NftMetadataFilter = {
-  _and: InputMaybe<Array<NftMetadataFilter>>;
-  _nor: InputMaybe<Array<NftMetadataFilter>>;
-  _or: InputMaybe<Array<NftMetadataFilter>>;
   attributes: InputMaybe<NftAttributeFilter>;
   name: InputMaybe<String_Comparator_Exp>;
 };
@@ -748,9 +805,6 @@ export type PoapEventPoapsArgs = {
 };
 
 export type PoapEventFilter = {
-  _and: InputMaybe<Array<PoapEventFilter>>;
-  _nor: InputMaybe<Array<PoapEventFilter>>;
-  _or: InputMaybe<Array<PoapEventFilter>>;
   city: InputMaybe<String_Comparator_Exp>;
   country: InputMaybe<String_Comparator_Exp>;
   dappName: InputMaybe<PoapDappName_Comparator_Exp>;
@@ -783,9 +837,6 @@ export type PoapEventsOutput = {
 };
 
 export type PoapFilter = {
-  _and: InputMaybe<Array<PoapFilter>>;
-  _nor: InputMaybe<Array<PoapFilter>>;
-  _or: InputMaybe<Array<PoapFilter>>;
   createdAtBlockNumber: InputMaybe<Int_Comparator_Exp>;
   dappName: InputMaybe<PoapDappName_Comparator_Exp>;
   dappSlug: InputMaybe<PoapDappSlug_Comparator_Exp>;
@@ -868,6 +919,7 @@ export type ProjectDetails = {
 export type Query = {
   Accounts: Maybe<AccountsOutput>;
   Domains: Maybe<DomainsOutput>;
+  FarcasterCasts: Maybe<FarcasterCastOutput>;
   FarcasterChannelParticipants: Maybe<FarcasterChannelParticipantsOutput>;
   FarcasterChannels: Maybe<FarcasterChannelsOutput>;
   FarcasterValidateFrameMessage: Maybe<FarcasterFrameMessageOutput>;
@@ -882,6 +934,7 @@ export type Query = {
   TokenTransfers: Maybe<TokenTransfersOutput>;
   Tokens: Maybe<TokensOutput>;
   TrendingMints: Maybe<TrendingMintsOutput>;
+  TrendingSwaps: Maybe<TrendingSwapsOutput>;
   TrendingTokens: Maybe<TrendingTokensOutput>;
   Wallet: Maybe<Wallet>;
   XMTPs: Maybe<XmtPsOutput>;
@@ -895,6 +948,11 @@ export type QueryAccountsArgs = {
 
 export type QueryDomainsArgs = {
   input: DomainsInput;
+};
+
+
+export type QueryFarcasterCastsArgs = {
+  input: FarcasterCastInput;
 };
 
 
@@ -968,6 +1026,11 @@ export type QueryTrendingMintsArgs = {
 };
 
 
+export type QueryTrendingSwapsArgs = {
+  input: TrendingSwapsInput;
+};
+
+
 export type QueryTrendingTokensArgs = {
   input: TrendingTokensInput;
 };
@@ -999,6 +1062,13 @@ export type Regex_String_Comparator_Exp = {
   _regex_in: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
+export type Simple_String_Comparator_Exp = {
+  _eq: InputMaybe<Scalars['String']['input']>;
+  _in: InputMaybe<Array<Scalars['String']['input']>>;
+  _ne: InputMaybe<Scalars['String']['input']>;
+  _nin: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
 export type Snapshot = {
   amount: Maybe<Scalars['String']['output']>;
   blockchain: Maybe<TokenBlockchain>;
@@ -1026,9 +1096,6 @@ export enum SnapshotBlockchain {
 }
 
 export type SnapshotFilter = {
-  _and: InputMaybe<Array<SnapshotFilter>>;
-  _nor: InputMaybe<Array<SnapshotFilter>>;
-  _or: InputMaybe<Array<SnapshotFilter>>;
   blockNumber: InputMaybe<Range_Comparator_Exp>;
   date: InputMaybe<Date_Range_Comparator_Exp>;
   owner: InputMaybe<Identity_Comparator_Exp>;
@@ -1085,7 +1152,6 @@ export type Social = {
   profileCreatedAtBlockTimestamp: Maybe<Scalars['Time']['output']>;
   profileDisplayName: Maybe<Scalars['String']['output']>;
   profileHandle: Maybe<Scalars['String']['output']>;
-  profileHandleNft: Maybe<TokenNft>;
   profileImage: Maybe<Scalars['String']['output']>;
   profileImageContentValue: Maybe<Media>;
   profileLastUpdatedAtBlockNumber: Maybe<Scalars['Int']['output']>;
@@ -1097,7 +1163,6 @@ export type Social = {
   profileTokenIdHex: Maybe<Scalars['String']['output']>;
   profileTokenUri: Maybe<Scalars['String']['output']>;
   profileUrl: Maybe<Scalars['String']['output']>;
-  tokenNft: Maybe<TokenNft>;
   twitterUserName: Maybe<Scalars['String']['output']>;
   updatedAt: Maybe<Scalars['Time']['output']>;
   userAddress: Maybe<Scalars['Address']['output']>;
@@ -1149,9 +1214,6 @@ export type SocialDappSlug_Comparator_Exp = {
 };
 
 export type SocialFilter = {
-  _and: InputMaybe<Array<SocialFilter>>;
-  _nor: InputMaybe<Array<SocialFilter>>;
-  _or: InputMaybe<Array<SocialFilter>>;
   dappName: InputMaybe<SocialDappName_Comparator_Exp>;
   dappSlug: InputMaybe<SocialDappSlug_Comparator_Exp>;
   followerCount: InputMaybe<Int_Comparator_Exp>;
@@ -1180,9 +1242,6 @@ export type SocialFollower = {
 };
 
 export type SocialFollowerFilter = {
-  _and: InputMaybe<Array<SocialFollowerFilter>>;
-  _nor: InputMaybe<Array<SocialFollowerFilter>>;
-  _or: InputMaybe<Array<SocialFollowerFilter>>;
   blockNumber: InputMaybe<Int_Comparator_Exp>;
   dappName: InputMaybe<SocialDappName_Comparator_Exp>;
   dappSlug: InputMaybe<SocialDappSlug_Comparator_Exp>;
@@ -1232,9 +1291,6 @@ export type SocialFollowing = {
 };
 
 export type SocialFollowingFilter = {
-  _and: InputMaybe<Array<SocialFollowingFilter>>;
-  _nor: InputMaybe<Array<SocialFollowingFilter>>;
-  _or: InputMaybe<Array<SocialFollowingFilter>>;
   blockNumber: InputMaybe<Int_Comparator_Exp>;
   dappName: InputMaybe<SocialDappName_Comparator_Exp>;
   dappSlug: InputMaybe<SocialDappSlug_Comparator_Exp>;
@@ -1430,9 +1486,6 @@ export type TokenBalanceTokenTransfersArgs = {
 };
 
 export type TokenBalanceFilter = {
-  _and: InputMaybe<Array<TokenBalanceFilter>>;
-  _nor: InputMaybe<Array<TokenBalanceFilter>>;
-  _or: InputMaybe<Array<TokenBalanceFilter>>;
   formattedAmount: InputMaybe<Float_Comparator_Exp>;
   lastUpdatedTimestamp: InputMaybe<Time_Comparator_Exp>;
   owner: InputMaybe<Identity_Comparator_Exp>;
@@ -1469,14 +1522,10 @@ export enum TokenBlockchain {
   Base = 'base',
   Ethereum = 'ethereum',
   Gold = 'gold',
-  Polygon = 'polygon',
   Zora = 'zora'
 }
 
 export type TokenFilter = {
-  _and: InputMaybe<Array<TokenFilter>>;
-  _nor: InputMaybe<Array<TokenFilter>>;
-  _or: InputMaybe<Array<TokenFilter>>;
   address: InputMaybe<Address_Comparator_Exp>;
   isSpam: InputMaybe<Boolean_Comparator_Exp>;
   name: InputMaybe<String_Comparator_Exp>;
@@ -1542,9 +1591,6 @@ export type TokenNftTokenTransfersArgs = {
 };
 
 export type TokenNftFilter = {
-  _and: InputMaybe<Array<TokenNftFilter>>;
-  _nor: InputMaybe<Array<TokenNftFilter>>;
-  _or: InputMaybe<Array<TokenNftFilter>>;
   address: InputMaybe<Address_Comparator_Exp>;
   metaData: InputMaybe<NftMetadataFilter>;
   tokenId: InputMaybe<String_Comparator_Exp>;
@@ -1726,6 +1772,61 @@ export type TrendingMintsOutput = {
   pageInfo: Maybe<PageInfo>;
 };
 
+export type TrendingSwap = {
+  address: Maybe<Scalars['String']['output']>;
+  blockchain: Maybe<Scalars['String']['output']>;
+  buyTransactionCount: Maybe<Scalars['Int']['output']>;
+  buyVolume: Maybe<Scalars['Float']['output']>;
+  chainId: Maybe<Scalars['String']['output']>;
+  criteria: Maybe<Scalars['String']['output']>;
+  id: Maybe<Scalars['String']['output']>;
+  sellTransactionCount: Maybe<Scalars['Int']['output']>;
+  sellVolume: Maybe<Scalars['Float']['output']>;
+  timeFrom: Maybe<Scalars['Time']['output']>;
+  timeTo: Maybe<Scalars['Time']['output']>;
+  token: Maybe<Token>;
+  totalTransactionCount: Maybe<Scalars['Int']['output']>;
+  totalUniqueWallets: Maybe<Scalars['Int']['output']>;
+  totalVolume: Maybe<Scalars['Float']['output']>;
+  uniqueBuyWallets: Maybe<Scalars['Int']['output']>;
+  uniqueSellWallets: Maybe<Scalars['Int']['output']>;
+};
+
+export enum TrendingSwapsBlockchain {
+  Base = 'base',
+  Ethereum = 'ethereum'
+}
+
+export enum TrendingSwapsCriteria {
+  BuyTransactionCount = 'buy_transaction_count',
+  BuyVolume = 'buy_volume',
+  SellTransactionCount = 'sell_transaction_count',
+  SellVolume = 'sell_volume',
+  TotalTransactionCount = 'total_transaction_count',
+  TotalUniqueWallets = 'total_unique_wallets',
+  TotalVolume = 'total_volume',
+  UniqueBuyWallets = 'unique_buy_wallets',
+  UniqueSellWallets = 'unique_sell_wallets'
+}
+
+export type TrendingSwapsFilter = {
+  address: InputMaybe<Trending_Comparator_Exp>;
+};
+
+export type TrendingSwapsInput = {
+  blockchain: TrendingSwapsBlockchain;
+  criteria: TrendingSwapsCriteria;
+  cursor: InputMaybe<Scalars['String']['input']>;
+  filter: InputMaybe<TrendingSwapsFilter>;
+  limit: InputMaybe<Scalars['Int']['input']>;
+  timeFrame: TimeFrame;
+};
+
+export type TrendingSwapsOutput = {
+  TrendingSwap: Maybe<Array<TrendingSwap>>;
+  pageInfo: Maybe<PageInfo>;
+};
+
 export type TrendingToken = {
   address: Maybe<Scalars['String']['output']>;
   audience: Maybe<Scalars['String']['output']>;
@@ -1867,9 +1968,6 @@ export type Xmtp = {
 };
 
 export type XmtpFilter = {
-  _and: InputMaybe<Array<XmtpFilter>>;
-  _nor: InputMaybe<Array<XmtpFilter>>;
-  _or: InputMaybe<Array<XmtpFilter>>;
   owner: InputMaybe<Identity_Comparator_Exp>;
 };
 
