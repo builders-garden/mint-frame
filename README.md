@@ -25,6 +25,9 @@ make sure to populate the `.env` file with the correct values:
 
 ```bash
 AIRSTACK_API_KEY="" # your Airstack API key
+BASE_URL= # deployed vercel url
+DEV_URL= # localhost url with port
+PUBLIC_BOT_ADDRESS= # the address of the bot for deeplink with xmtp apps
 ```
 
 once everything is ready, in order to start the development server you must run the following command:
