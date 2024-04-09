@@ -39,7 +39,7 @@ bun dev # using bun
 once the app is running, you can construct an URL with the following format:
 
 ```
-http://localhost:3000/frame/{CHAIN}?a={ADDRESS}&c={COUNT}
+http://localhost:3000/?chain={CHAIN}?a={ADDRESS}&c={COUNT}
 ```
 
 where:
