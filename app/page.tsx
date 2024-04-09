@@ -7,11 +7,16 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+let url = process.env.BASE_URL;
+if (process.env.NODE_ENV === "development") {
+  url = process.env.DEV_URL;
+}
+console.log(url);
 export async function generateMetadata({ searchParams }: Props) {
   const metadata = await fetchMetadata(
     new URL(
       `/frame/${searchParams.chain}?a=${searchParams.a}&c=${searchParams.c}`,
-      process.env.BASE_URL || "http://localhost:3001"
+      url
     )
   );
   return {
@@ -64,7 +69,7 @@ export default function Home({
               <a
                 target="_blank"
                 className="text-red-600"
-                href="https://converse.xyz/"
+                href={`https://converse.xyz/dm/${process.env.PUBLIC_BOT_ADDRESS}`}
               >
                 Converse
               </a>
@@ -74,7 +79,7 @@ export default function Home({
               <a
                 target="_blank"
                 className="text-blue-600"
-                href="https://converse.xyz/"
+                href={`https://go.cb-w.com/messaging?address=${process.env.PUBLIC_BOT_ADDRESS}`}
               >
                 Coinbase Wallet
               </a>
