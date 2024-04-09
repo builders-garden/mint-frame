@@ -41,21 +41,23 @@ export default function Home({
             Get the latest trending mints on Zora
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <img src={`https://mint.builders.garden/api/image?a=${a}&c=${c}`} />
-          <div>
-            <button className="bg-white rounded-lg text-black p-2">
-              <a
-                target="_blank"
-                href={`https://zora.co/collect/${chain.toLowerCase()}:${checksumAddress(
-                  a
-                )}`}
-              >
-                Mint on Zora
-              </a>
-            </button>
+        {a && c && chain && (
+          <div className="flex flex-col items-center justify-center space-y-2">
+            <img src={`https://mint.builders.garden/api/image?a=${a}&c=${c}`} />
+            <div>
+              <button className="bg-white rounded-lg text-black p-2">
+                <a
+                  target="_blank"
+                  href={`https://zora.co/collect/${chain.toLowerCase()}:${checksumAddress(
+                    a
+                  )}`}
+                >
+                  Mint on Zora
+                </a>
+              </button>
+            </div>
           </div>
-        </div>
+        )}
         <div className="flex flex-col mt-8 space-y-4">
           <div className="flex flex-row space-x-2">
             <p className="text-center font-medium">
