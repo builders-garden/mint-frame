@@ -11,7 +11,6 @@ let url = process.env.BASE_URL;
 if (process.env.NODE_ENV === "development") {
   url = process.env.DEV_URL;
 }
-console.log(url);
 export async function generateMetadata({ searchParams }: Props) {
   const metadata = await fetchMetadata(
     new URL(
@@ -36,7 +35,7 @@ export default function Home({
 }) {
   const { a, c, chain } = searchParams as any;
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-8 bg-black">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-black">
       <div className="flex flex-col items-center justify-center space-y-8">
         <div className="flex flex-col items-center justify-center space-y-2">
           <div className="text-3xl text-center font-black">
