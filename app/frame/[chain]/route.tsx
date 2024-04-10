@@ -4,13 +4,14 @@ import { createFrames, Button } from "frames.js/next";
 import { checksumAddress, isAddress } from "viem";
 
 const frames = createFrames();
+
 let url = process.env.PUBLIC_FRAME_URL;
 if (process.env.NODE_ENV === "development") {
   url = process.env.DEV_URL;
 }
+
 const handleRequest = frames(async (ctx) => {
-  // console.log(ctx.url);
-  const chain = ctx.url.searchParams.get("chain");
+  const chain = ctx.url.pathname.replaceAll("/frame/", "");
   const address = ctx.url.searchParams.get("a");
   const count = ctx.url.searchParams.get("c");
   if (chain !== "base" || !address || !isAddress(address) || !count) {
