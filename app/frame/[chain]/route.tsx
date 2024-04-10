@@ -11,7 +11,6 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const handleRequest = frames(async (ctx) => {
-  // console.log(ctx.url);
   const chain = ctx.url.pathname.replaceAll("/frame/", "");
   const address = ctx.url.searchParams.get("a");
   const count = ctx.url.searchParams.get("c");
