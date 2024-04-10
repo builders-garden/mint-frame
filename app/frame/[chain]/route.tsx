@@ -101,7 +101,7 @@ const handleRequest = frames(async (ctx) => {
   }
 
   return {
-    image: `https://mint.builders.garden/api/image?a=${address}&c=${count}`,
+    image: `${process.env.PUBLIC_FRAME_URL}/api/image?a=${address}&c=${count}`,
     imageOptions: {
       aspectRatio: "1:1",
       width: 500,

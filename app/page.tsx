@@ -7,7 +7,7 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-let url = process.env.BASE_URL;
+let url = process.env.PUBLIC_FRAME_URL;
 if (process.env.NODE_ENV === "development") {
   url = process.env.DEV_URL;
 }
@@ -47,7 +47,9 @@ export default function Home({
         </div>
         {a && c && chain && (
           <div className="flex flex-col items-center justify-center space-y-2">
-            <img src={`https://mint.builders.garden/api/image?a=${a}&c=${c}`} />
+            <img
+              src={`${process.env.PUBLIC_FRAME_URL}/api/image?a=${a}&c=${c}`}
+            />
             <div>
               <button className="bg-white rounded-lg text-black p-2">
                 <a
