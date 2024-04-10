@@ -5,6 +5,11 @@ import { checksumAddress, isAddress } from "viem";
 
 const frames = createFrames();
 
+let url = process.env.PUBLIC_FRAME_URL;
+if (process.env.NODE_ENV === "development") {
+  url = process.env.DEV_URL;
+}
+
 const handleRequest = frames(async (ctx) => {
   // console.log(ctx.url);
   const chain = ctx.url.pathname.replaceAll("/frame/", "");
@@ -101,7 +106,7 @@ const handleRequest = frames(async (ctx) => {
   }
 
   return {
-    image: `https://mint.builders.garden/api/image?a=${address}&c=${count}`,
+    image: `${url}/api/image?a=${address}&c=${count}`,
     imageOptions: {
       aspectRatio: "1:1",
       width: 500,
