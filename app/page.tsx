@@ -7,11 +7,15 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+let url = process.env.BASE_URL;
+if (process.env.NODE_ENV === "development") {
+  url = process.env.DEV_URL;
+}
 export async function generateMetadata({ searchParams }: Props) {
   const metadata = await fetchMetadata(
     new URL(
       `/frame/${searchParams.chain}?a=${searchParams.a}&c=${searchParams.c}`,
-      process.env.BASE_URL || "http://localhost:3001"
+      url
     )
   );
   return {
@@ -31,7 +35,7 @@ export default function Home({
 }) {
   const { a, c, chain } = searchParams as any;
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-8 bg-black">
+    <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-black">
       <div className="flex flex-col items-center justify-center space-y-8">
         <div className="flex flex-col items-center justify-center space-y-2">
           <div className="text-3xl text-center font-black">
@@ -64,7 +68,7 @@ export default function Home({
               <a
                 target="_blank"
                 className="text-red-600"
-                href="https://converse.xyz/"
+                href={`https://converse.xyz/dm/${process.env.PUBLIC_BOT_ADDRESS}`}
               >
                 Converse
               </a>
@@ -74,7 +78,7 @@ export default function Home({
               <a
                 target="_blank"
                 className="text-blue-600"
-                href="https://converse.xyz/"
+                href={`https://go.cb-w.com/messaging?address=${process.env.PUBLIC_BOT_ADDRESS}`}
               >
                 Coinbase Wallet
               </a>

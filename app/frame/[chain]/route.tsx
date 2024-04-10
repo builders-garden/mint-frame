@@ -7,7 +7,7 @@ const frames = createFrames();
 
 const handleRequest = frames(async (ctx) => {
   // console.log(ctx.url);
-  const chain = ctx.url.pathname.replaceAll("/frame/", "");
+  const chain = ctx.url.searchParams.get("chain");
   const address = ctx.url.searchParams.get("a");
   const count = ctx.url.searchParams.get("c");
   if (chain !== "base" || !address || !isAddress(address) || !count) {
