@@ -18,6 +18,10 @@ export async function generateMetadata({ searchParams }: Props) {
       url
     )
   );
+  console.log(
+    `/frame/${searchParams.chain}?a=${searchParams.a}&c=${searchParams.c}`,
+    url
+  );
   return {
     title: "Trending Mints Bot",
     other: {
@@ -47,9 +51,7 @@ export default function Home({
         </div>
         {a && c && chain && (
           <div className="flex flex-col items-center justify-center space-y-2">
-            <img
-              src={`${process.env.PUBLIC_FRAME_URL}/api/image?a=${a}&c=${c}`}
-            />
+            <img src={`${url}/api/image?a=${a}&c=${c}`} />
             <div>
               <button className="bg-white rounded-lg text-black p-2">
                 <a
