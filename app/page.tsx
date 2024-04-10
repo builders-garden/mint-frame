@@ -19,6 +19,10 @@ export async function generateMetadata({ searchParams }: Props) {
       url
     )
   );
+  console.log(
+    `/frame/${searchParams.chain}?a=${searchParams.a}&c=${searchParams.c}`,
+    url
+  );
   return {
     title: "Trending Mints Bot",
     other: {
