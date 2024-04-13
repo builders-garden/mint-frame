@@ -7,11 +7,6 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-let url = process.env.PUBLIC_FRAME_URL;
-if (process.env.NODE_ENV === "development") {
-  url = process.env.DEV_URL;
-}
-
 export async function generateMetadata({ searchParams }: Props) {
   const metadata = await fetchMetadata(
     new URL(
