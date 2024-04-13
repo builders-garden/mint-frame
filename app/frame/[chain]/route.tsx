@@ -5,7 +5,6 @@ import { checksumAddress, isAddress } from "viem";
 
 const frames = createFrames();
 
-";
 //deploy test
 const handleRequest = frames(async (ctx) => {
   const chain = ctx.url.pathname.replaceAll("/frame/", "");
@@ -102,7 +101,9 @@ const handleRequest = frames(async (ctx) => {
   }
 
   return {
-    image: `${process.env.PUBLIC_FRAME_URL || "http://localhost:3001"}/api/image?a=${address}&c=${count}`,
+    image: `${
+      process.env.PUBLIC_FRAME_URL || "http://localhost:3001"
+    }/api/image?a=${address}&c=${count}`,
     imageOptions: {
       aspectRatio: "1:1",
       width: 500,
