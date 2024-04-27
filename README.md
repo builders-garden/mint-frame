@@ -32,7 +32,6 @@ cp .env.example .env
 ```bash
 BASE_URL= # frame url
 AIRSTACK_API_KEY= # api key
-PUBLIC_BOT_ADDRESS= # bot address
 REDIS_CONNECTION_STRING= # redis connection string
 ```
 

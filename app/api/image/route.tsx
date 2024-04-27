@@ -12,8 +12,7 @@ export async function GET(req: NextRequest) {
   const count = req.nextUrl.searchParams.get("c");
 
   const nft = await fetchNft(address!);
-  const image = nft.contentValue?.image?.small;
-
+  const image = nft?.contentValue?.image?.small as string;
   return new ImageResponse(
     (
       <div
@@ -30,7 +29,7 @@ export async function GET(req: NextRequest) {
         }}
       >
         <img
-          src={image!}
+          src={image}
           style={{
             width: "100%",
             borderRadius: "8px",
