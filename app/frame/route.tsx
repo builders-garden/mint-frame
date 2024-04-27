@@ -10,27 +10,9 @@ const handleRequest = frames(async (ctx) => {
   const chain = ctx.url.searchParams.get("chain");
   const address = ctx.url.searchParams.get("a");
   const count = ctx.url.searchParams.get("c");
-  if (chain !== "base" || !address || !isAddress(address) || !count) {
-    return {
-      imageOptions: {
-        aspectRatio: "1:1",
-        width: 500,
-        height: 500,
-      },
-      accepts: [
-        {
-          id: "farcaster",
-          version: "vNext",
-        },
-        {
-          id: "xmtp",
-          version: "vNext",
-        },
-      ],
-    };
-  }
-  const nft = await fetchNft(address);
-  if (!nft) {
+
+  const nft = address ? await fetchNft(address) : null;
+  if (chain !== "base" || !address || !isAddress(address) || !count || !nft) {
     return {
       accepts: [
         {
@@ -68,13 +50,12 @@ const handleRequest = frames(async (ctx) => {
               whiteSpace: "pre-wrap",
             }}
           >
-            {`The mint you're looking for is no longer trending, sorry!`}
+            {`error`}
           </div>
         </div>
       ),
     };
   }
-
   return {
     image: `${
       process.env.BASE_URL || "http://localhost:3001"
