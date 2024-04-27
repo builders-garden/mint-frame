@@ -7,7 +7,7 @@ import {
 } from "./airstack-types";
 import { getRedisClient } from "./redis";
 
-init(process.env.AIRSTACK_API_KEY as string);
+//init(process.env.AIRSTACK_API_KEY as string);
 
 export const TRENDING_MINTS_QUERY_BASE =
   /* GraphQL */
@@ -134,7 +134,7 @@ export const fetchNft = async (address: string) => {
   if (cachedNft) {
     return JSON.parse(cachedNft);
   }
-
+  /*
   const { data, error }: NFTQueryResponse = await fetchQuery(
     NFT_DETAIL_QUERY_BASE,
     {
@@ -157,5 +157,5 @@ export const fetchNft = async (address: string) => {
   const thirtyDaysInSeconds = 60 * 60 * 24 * 30;
   await redis.setEx(address, thirtyDaysInSeconds, JSON.stringify(nft));
 
-  return nft;
+  return nft;*/
 };

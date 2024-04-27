@@ -1,5 +1,4 @@
 import { fetchMetadata } from "frames.js/next";
-import { useRouter } from "next/router";
 import { checksumAddress } from "viem";
 
 type Props = {
@@ -8,19 +7,22 @@ type Props = {
 };
 
 export async function generateMetadata({ searchParams }: Props) {
-  const metadata = await fetchMetadata(
-    new URL(
-      `/frame/${searchParams.chain}?a=${searchParams.a}&c=${searchParams.c}`,
-      process.env.PUBLIC_FRAME_URL || "http://localhost:3001"
-    )
-  );
+  let queryParams = [];
+  if (searchParams.chain) queryParams.push(`chain=${searchParams.chain}`);
+  if (searchParams.a) queryParams.push(`a=${searchParams.a}`);
+  if (searchParams.c) queryParams.push(`c=${searchParams.c}`);
+  const queryString = `/frame/${searchParams.chain}?${queryParams.join("&")}`;
 
-  return {
-    title: "Trending Mints Bot",
+  const metadata = {
+    title: "Mint Frame",
     other: {
-      ...metadata,
+      ...(await fetchMetadata(
+        new URL(queryString, process.env.BASE_URL || "http://localhost:3001")
+      )),
     },
   };
+
+  return metadata;
 }
 
 export default function Home({
@@ -35,18 +37,16 @@ export default function Home({
     <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-black">
       <div className="flex flex-col items-center justify-center space-y-8">
         <div className="flex flex-col items-center justify-center space-y-2">
-          <div className="text-3xl text-center font-black">
-            Trending Mints Bot
-          </div>
+          <div className="text-3xl text-center font-black">Mint Frame</div>
           <div className="text-lg text-center font-semibold">
-            Get the latest trending mints on Zora
+            Display base mints in a frame
           </div>
         </div>
         {a && c && chain && (
           <div className="flex flex-col items-center justify-center space-y-2">
             <img
               src={`${
-                process.env.PUBLIC_FRAME_URL || "http://localhost:3001"
+                process.env.BASE_URL || "http://localhost:3001"
               }/api/image?a=${a}&c=${c}`}
             />
             <div>

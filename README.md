@@ -13,7 +13,7 @@ http://localhost:3001/?chain={CHAIN}&a={ADDRESS}&c={COUNT}
 where:
 
 - `{CHAIN}` is the blockchain network, in this case only `base` is supported;
-- `{ADDRESS}` is the address of the trending mint NFT;
+- `{ADDRESS}` is the address of the NFT
 - `{COUNT}` is the number of trending mints that you want to display.
 
 ## Development
@@ -30,7 +30,7 @@ cp .env.example .env
 **Set the variables**
 
 ```bash
-PUBLIC_FRAME_URL= # frame url
+BASE_URL= # frame url
 AIRSTACK_API_KEY= # api key
 PUBLIC_BOT_ADDRESS= # bot address
 REDIS_CONNECTION_STRING= # redis connection string

@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
   const count = req.nextUrl.searchParams.get("c");
 
   const nft = await fetchNft(address!);
-  console.log(nft);
   const image = nft.contentValue?.image?.small;
 
   return new ImageResponse(
