@@ -1,49 +1,13 @@
-# 🌳 mint-frame
+# Mint Frame 🌳
 
-a generic NextJS app that allows users to create trending mints frames by constructing a specific url.
+> 💬 **Try it:** Message `trendingmints.eth`
 
-## 📦 installation
+## Usage
 
-once you have cloned the repository, you can install the dependencies by running the following command:
-
-```bash
-npm install # using npm
-yarn install # using yarn
-pnpm install # using pnpm
-bun install # using bun
-```
-
-## 🚀 usage
-
-the first step is to setup the **environment variables** for the project:
-
-```bash
-cp .env.example .env
-```
-
-make sure to populate the `.env` file with the correct values:
-
-```bash
-AIRSTACK_API_KEY="" # your Airstack API key
-PUBLIC_FRAME_URL= # deployed vercel url
-DEV_URL= # localhost url with port
-PUBLIC_BOT_ADDRESS= # the address of the bot for deeplink with xmtp apps
-REDIS_CONNECTION_STRING= # redis connection string for caching
-```
-
-once everything is ready, in order to start the development server you must run the following command:
-
-```bash
-npm run dev # using npm
-yarn dev # using yarn
-pnpm dev # using pnpm
-bun dev # using bun
-```
-
-once the app is running, you can construct an URL with the following format:
+Once the app is running, you can construct an URL with the following format:
 
 ```
-http://localhost:3000/?chain={CHAIN}&a={ADDRESS}&c={COUNT}
+http://localhost:3001/?chain={CHAIN}&a={ADDRESS}&c={COUNT}
 ```
 
 where:
@@ -52,6 +16,37 @@ where:
 - `{ADDRESS}` is the address of the trending mint NFT;
 - `{COUNT}` is the number of trending mints that you want to display.
 
-## 📜 license
+## Development
 
-this project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+To kickstart the tutorial, you'll need to clone the repository containing the bot code. Follow these steps:
+
+```bash
+git clone https://github.com/fabriguespe/mint-frame.git
+cd mint-frame
+# copy env variables template
+cp .env.example .env
+```
+
+**Set the variables**
+
+```bash
+PUBLIC_FRAME_URL= # frame url
+AIRSTACK_API_KEY= # api key
+PUBLIC_BOT_ADDRESS= # bot address
+REDIS_CONNECTION_STRING= # redis connection string
+```
+
+> ⚠️ Bot kit is not compatible with `bun` yet. Use `npm` or `yarn`
+
+```bash
+# install dependencies
+yarn install
+
+# running the bot
+yarn build
+yarn start
+
+# to run with hot-reload
+yarn build:watch
+yarn start:watch
+```
