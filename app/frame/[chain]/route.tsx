@@ -1,64 +1,33 @@
 /* eslint-disable react/jsx-key */
-import { ImageResponse } from "next/og";
 import { fetchNft } from "@/lib/airstack";
 import { createFrames, Button } from "frames.js/next";
-import fs from "fs";
-import { join } from "path";
 import { checksumAddress, isAddress } from "viem";
 
 const frames = createFrames();
-const interFontPath = join(process.cwd(), "Inter-SemiBold.ttf");
-const interFontData = fs.readFileSync(interFontPath);
 
+//deploy test
 const handleRequest = frames(async (ctx) => {
   const chain = ctx.url.pathname.replaceAll("/frame/", "");
   const address = ctx.url.searchParams.get("a");
   const count = ctx.url.searchParams.get("c");
   if (chain !== "base" || !address || !isAddress(address) || !count) {
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            alignItems: "center",
-            background: "black",
-            display: "flex",
-            flexDirection: "column",
-            flexWrap: "nowrap",
-            height: "100%",
-            justifyContent: "center",
-            textAlign: "center",
-            width: "100%",
-          }}
-        >
-          <div
-            style={{
-              color: "white",
-              fontSize: 60,
-              fontStyle: "normal",
-              letterSpacing: "-0.025em",
-              lineHeight: 1.4,
-              marginTop: 30,
-              padding: "0 120px",
-              whiteSpace: "pre-wrap",
-            }}
-          >
-            {`Invalid mint!`}
-          </div>
-        </div>
-      ),
-      {
+    return {
+      imageOptions: {
+        aspectRatio: "1:1",
         width: 500,
         height: 500,
-        fonts: [
-          {
-            data: interFontData,
-            name: "Inter-SemiBold.ttf",
-            style: "normal",
-            weight: 400,
-          },
-        ],
-      }
-    );
+      },
+      accepts: [
+        {
+          id: "farcaster",
+          version: "vNext",
+        },
+        {
+          id: "xmtp",
+          version: "vNext",
+        },
+      ],
+    };
   }
   const nft = await fetchNft(address);
   if (!nft) {

@@ -8,16 +8,16 @@ type Props = {
 
 export async function generateMetadata({ searchParams }: Props) {
   let queryParams = [];
+  if (searchParams.chain) queryParams.push(`chain=${searchParams.chain}`);
   if (searchParams.a) queryParams.push(`a=${searchParams.a}`);
   if (searchParams.c) queryParams.push(`c=${searchParams.c}`);
-  const queryString = queryParams.join("&");
-  const url = `/frame/base?${queryString}`;
+  const queryString = `/frame/${searchParams.chain}?${queryParams.join("&")}`;
 
   const metadata = {
     title: "Mint Frame",
     other: {
       ...(await fetchMetadata(
-        new URL(url, process.env.BASE_URL || "http://localhost:3001")
+        new URL(queryString, process.env.BASE_URL || "http://localhost:3001")
       )),
     },
   };
@@ -64,6 +64,28 @@ export default function Home({
           </div>
         )}
         <div className="flex flex-col mt-8 space-y-4">
+          <div className="flex flex-row space-x-2">
+            <p className="text-center font-medium">
+              <a
+                target="_blank"
+                className="text-red-600"
+                href={`https://converse.xyz/dm/${process.env.PUBLIC_BOT_ADDRESS}`}
+              >
+                Converse
+              </a>
+            </p>
+            <p>•</p>
+            <p className="text-center font-medium">
+              <a
+                target="_blank"
+                className="text-blue-600"
+                href={`https://go.cb-w.com/messaging?address=${process.env.PUBLIC_BOT_ADDRESS}`}
+              >
+                Coinbase Wallet
+              </a>
+            </p>
+          </div>
+
           <p className="text-center text-sm">
             Made with ❤️ by{" "}
             <a className="text-green-500" href="https://builders.garden">
