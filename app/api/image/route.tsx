@@ -1,7 +1,7 @@
-import { fetchNft } from "@/lib/airstack";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 import fs from "fs";
+import { fetchNft } from "@/lib/airstack";
 import { join } from "path";
 
 const interFontPath = join(process.cwd(), "Inter-SemiBold.ttf");
@@ -13,7 +13,6 @@ export async function GET(req: NextRequest) {
 
   const nft = await fetchNft(address!);
   const image = nft.contentValue?.image?.small;
-
   return new ImageResponse(
     (
       <div
@@ -29,14 +28,28 @@ export async function GET(req: NextRequest) {
           padding: "4px",
         }}
       >
-        <img
-          src={image!}
-          style={{
-            width: "100%",
-            borderRadius: "8px",
-            border: "2px solid white",
-          }}
-        />
+        {image && (
+          <img
+            src={image}
+            style={{
+              width: "100%",
+              borderRadius: "8px",
+              border: "2px solid white",
+            }}
+          />
+        )}
+        {!image && (
+          <div
+            style={{
+              color: "white",
+              fontSize: "16px",
+              textAlign: "center",
+              width: "100%",
+            }}
+          >
+            No image available
+          </div>
+        )}
         <div
           style={{
             position: "absolute",

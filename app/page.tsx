@@ -11,7 +11,10 @@ export async function generateMetadata({ searchParams }: Props) {
   if (searchParams.chain) queryParams.push(`chain=${searchParams.chain}`);
   if (searchParams.a) queryParams.push(`a=${searchParams.a}`);
   if (searchParams.c) queryParams.push(`c=${searchParams.c}`);
-  const queryString = `/frame/${searchParams.chain}?${queryParams.join("&")}`;
+
+  const query = queryParams.join("&");
+
+  const queryString = `/frame?${query}`;
 
   const metadata = {
     title: "Mint Frame",
@@ -39,7 +42,7 @@ export default function Home({
         <div className="flex flex-col items-center justify-center space-y-2">
           <div className="text-3xl text-center font-black">Mint Frame</div>
           <div className="text-lg text-center font-semibold">
-            Display base mints in a frame
+            Display Base mints in an Open Frame
           </div>
         </div>
         {a && c && chain && (

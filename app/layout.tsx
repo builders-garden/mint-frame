@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "mint | builders.garden",
-  description: "Mint trending NFTs on Base using a Farcaster Frame!",
+  title: "Mint Frame",
+  description: "Display Base mints in an Open Frame",
 };
 
 export default function RootLayout({
