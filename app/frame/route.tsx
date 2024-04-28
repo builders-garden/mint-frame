@@ -5,107 +5,61 @@ import { checksumAddress, isAddress } from "viem";
 
 const frames = createFrames();
 
-let url = process.env.PUBLIC_FRAME_URL;
-if (process.env.NODE_ENV === "development") {
-  url = process.env.DEV_URL;
-}
-
+//deploy test
 const handleRequest = frames(async (ctx) => {
-  const chain = ctx.url.pathname.replaceAll("/frame/", "");
+  const chain = ctx.url.searchParams.get("chain");
   const address = ctx.url.searchParams.get("a");
   const count = ctx.url.searchParams.get("c");
-  if (chain !== "base" || !address || !isAddress(address) || !count) {
-    return {
-      accepts: [
-        {
-          id: "farcaster",
-          version: "vNext",
-        },
-        {
-          id: "xmtp",
-          version: "vNext",
-        },
-      ],
-      image: (
-        <div
-          style={{
-            alignItems: "center",
-            background: "black",
-            display: "flex",
-            flexDirection: "column",
-            flexWrap: "nowrap",
-            height: "100%",
-            justifyContent: "center",
-            textAlign: "center",
-            width: "100%",
-          }}
-        >
-          <div
-            style={{
-              color: "white",
-              fontSize: 60,
-              fontStyle: "normal",
-              letterSpacing: "-0.025em",
-              lineHeight: 1.4,
-              marginTop: 30,
-              padding: "0 120px",
-              whiteSpace: "pre-wrap",
-            }}
-          >
-            {`The mint you're looking for is no longer trending, sorry!`}
-          </div>
-        </div>
-      ),
-    };
-  }
-  const nft = await fetchNft(address);
-  if (!nft) {
-    return {
-      accepts: [
-        {
-          id: "farcaster",
-          version: "vNext",
-        },
-        {
-          id: "xmtp",
-          version: "vNext",
-        },
-      ],
-      image: (
-        <div
-          style={{
-            alignItems: "center",
-            background: "black",
-            display: "flex",
-            flexDirection: "column",
-            flexWrap: "nowrap",
-            height: "100%",
-            justifyContent: "center",
-            textAlign: "center",
-            width: "100%",
-          }}
-        >
-          <div
-            style={{
-              color: "white",
-              fontSize: 60,
-              fontStyle: "normal",
-              letterSpacing: "-0.025em",
-              lineHeight: 1.4,
-              marginTop: 30,
-              padding: "0 120px",
-              whiteSpace: "pre-wrap",
-            }}
-          >
-            {`The mint you're looking for is no longer trending, sorry!`}
-          </div>
-        </div>
-      ),
-    };
-  }
 
+  const nft = address ? await fetchNft(address) : null;
+  if (chain !== "base" || !address || !isAddress(address) || !count || !nft) {
+    return {
+      accepts: [
+        {
+          id: "farcaster",
+          version: "vNext",
+        },
+        {
+          id: "xmtp",
+          version: "vNext",
+        },
+      ],
+      image: (
+        <div
+          style={{
+            alignItems: "center",
+            background: "black",
+            display: "flex",
+            flexDirection: "column",
+            flexWrap: "nowrap",
+            height: "100%",
+            justifyContent: "center",
+            textAlign: "center",
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              color: "white",
+              fontSize: 60,
+              fontStyle: "normal",
+              letterSpacing: "-0.025em",
+              lineHeight: 1.4,
+              marginTop: 30,
+              padding: "0 120px",
+              whiteSpace: "pre-wrap",
+            }}
+          >
+            {`error`}
+          </div>
+        </div>
+      ),
+    };
+  }
   return {
-    image: `${url}/api/image?a=${address}&c=${count}`,
+    image: `${
+      process.env.BASE_URL || "http://localhost:3001"
+    }/api/image?a=${address}&c=${count}`,
     imageOptions: {
       aspectRatio: "1:1",
       width: 500,
